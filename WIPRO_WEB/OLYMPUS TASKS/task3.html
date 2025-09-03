@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch API Example</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+
+    <h2>Task 1: Fetch Employees Data (Console Output)</h2>
+    <button id="fetchEmployees">Fetch Employees</button>
+
+    <h2>Task 2: Fetch Random User and Display on Page</h2>
+    <button id="fetchUser">Get Random User</button>
+    <div id="userInfo" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px; max-width: 300px;">
+        <p><strong>Name:</strong> <span id="name"></span></p>
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <img id="profilePic" src="" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%;">
+    </div>
+
+    <script>
+        // Task 1
+        document.getElementById("fetchEmployees").addEventListener("click", function() {
+            fetch("https://dummy.restapiexample.com/api/v1/employees")
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Employees Data:", data);
+                })
+                .catch(error => console.error("Error fetching employees:", error));
+        });
+
+        // Task 2
+        document.getElementById("fetchUser").addEventListener("click", function() {
+            fetch("https://randomuser.me/api/")
+                .then(response => response.json())
+                .then(data => {
+                    const user = data.results[0];
+                    document.getElementById("name").textContent = `${user.name.first} ${user.name.last}`;
+                    document.getElementById("email").textContent = user.email;
+                    document.getElementById("profilePic").src = user.picture.medium;
+                })
+                .catch(error => console.error("Error fetching user:", error));
+        });
+    </script>
+</body>
+</html>

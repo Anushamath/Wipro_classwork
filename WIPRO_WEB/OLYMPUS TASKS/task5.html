@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Manager - Sprint 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background: #333;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5em;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: auto;
+      font-size: 0.9em;
+    }
+
+    .container {
+      background: #fff;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 600px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px 0;
+    }
+    button:hover {
+      background: #45a049;
+    }
+
+    .btn-delete {
+      background: #e74c3c;
+    }
+    .btn-delete:hover {
+      background: #c0392b;
+    }
+
+    .btn-edit {
+      background: #3498db;
+    }
+    .btn-edit:hover {
+      background: #2980b9;
+    }
+
+    form {
+      display: none;
+      margin-top: 15px;
+    }
+
+    form input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .contact-list {
+      margin-top: 20px;
+    }
+
+    .contact-card {
+      background: #f9f9f9;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .contact-card h3 {
+      margin: 0;
+      color: #333;
+    }
+
+    .contact-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .message {
+      text-align: center;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .success {
+      background: #2ecc71;
+      color: white;
+    }
+
+    .error {
+      background: #e74c3c;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    📒 Contact Manager - Sprint 2
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1>Manage Your Contacts</h1>
+    <button id="addContactBtn">Add Contact</button>
+
+    <div id="message" class="message"></div>
+
+    <!-- Contact Form -->
+    <form id="contactForm">
+      <input type="hidden" id="editIndex">
+      <input type="text" id="name" placeholder="Enter Name" required>
+      <input type="email" id="email" placeholder="Enter Email" required>
+      <input type="tel" id="phone" placeholder="Enter Phone Number" required>
+      <button type="submit">Save Contact</button>
+    </form>
+
+    <!-- Contact List -->
+    <div class="contact-list" id="contactList">
+      <h2>My Contacts</h2>
+      <!-- Contacts will appear here -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Contact Manager | Designed by Anusha 🚀
+  </footer>
+
+  <script>
+    const addContactBtn = document.getElementById("addContactBtn");
+    const contactForm = document.getElementById("contactForm");
+    const contactList = document.getElementById("contactList");
+    const messageBox = document.getElementById("message");
+
+    let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+
+    // Toggle form visibility
+    addContactBtn.addEventListener("click", () => {
+      contactForm.style.display = 
+        contactForm.style.display === "block" ? "none" : "block";
+      document.getElementById("editIndex").value = "";
+    });
+
+    // Handle form submit
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const editIndex = document.getElementById("editIndex").value;
+
+      if (!name || !email || !phone) {
+        showMessage("⚠️ All fields are required!", "error");
+        return;
+      }
+
+      const newContact = { name, email, phone };
+
+      if (editIndex === "") {
+        contacts.push(newContact);
+        showMessage("✅ Contact added successfully!", "success");
+      } else {
+        contacts[editIndex] = newContact;
+        showMessage("✏️ Contact updated successfully!", "success");
+      }
+
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+      displayContacts();
+      contactForm.reset();
+      contactForm.style.display = "none";
+    });
+
+    // Display contacts
+    function displayContacts() {
+      contactList.innerHTML = "<h2>My Contacts</h2>";
+      if (contacts.length === 0) {
+        contactList.innerHTML += "<p>No contacts found.</p>";
+      }
+      contacts.forEach((c, index) => {
+        const card = document.createElement("div");
+        card.classList.add("contact-card");
+        card.innerHTML = `
+          <h3>${c.name}</h3>
+          <p>Email: ${c.email}</p>
+          <p>Phone: ${c.phone}</p>
+          <button class="btn-edit" onclick="editContact(${index})">Edit</button>
+          <button class="btn-delete" onclick="deleteContact(${index})">Delete</button>
+        `;
+        contactList.appendChild(card);
+      });
+    }
+
+    // Edit contact
+    window.editContact = function (index) {
+      const contact = contacts[index];
+      document.getElementById("name").value = contact.name;
+      document.getElementById("email").value = contact.email;
+      document.getElementById("phone").value = contact.phone;
+      document.getElementById("editIndex").value = index;
+      contactForm.style.display = "block";
+    };
+
+    // Delete contact
+    window.deleteContact = function (index) {
+      contacts.splice(index, 1);
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+      displayContacts();
+      showMessage("🗑️ Contact deleted successfully!", "success");
+    };
+
+    // Show messages
+    function showMessage(msg, type) {
+      messageBox.textContent = msg;
+      messageBox.className = "message " + type;
+      messageBox.style.display = "block";
+      setTimeout(() => {
+        messageBox.style.display = "none";
+      }, 2500);
+    }
+
+    // Load existing contacts on page load
+    displayContacts();
+  </script>
+</body>
+</html>

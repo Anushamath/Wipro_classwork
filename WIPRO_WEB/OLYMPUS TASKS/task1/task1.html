@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Profile - Spring Flowers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #9fd8e5;
+    }
+
+    .container {
+      border: 2px solid black;
+      width: 70%;
+      margin: 40px auto;
+      background-color: #a84589;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #d2dc77;
+      padding: 15px;
+    }
+
+    .logo-button {
+      background-image: url('logo1.png') ;
+      padding: 40px 165px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .university-logo {
+      height: 50px;
+    }
+
+    .profile-section {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 40px;
+      background-color:#d2dc77;
+    }
+
+    .student-image {
+      width: 150px;
+      height: 150px;
+      border: 2px solid black;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 150px;
+      margin-right: 40px;
+      background-image: url('girl1.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .student-info {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+      }
+
+      .profile-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .student-image {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <div class="logo-button"></div>
+      <img class="university-logo" src="https://kletech.edu.in/images/logo.svg" alt="KLE Technological University">
+    </div>
+
+    <div class="profile-section">
+      <div class="student-image">
+        <!-- image inside circle via background -->
+      </div>
+      <div class="student-info">
+        <p>Name: Anusha Gaddadevaramath</p>
+        <p>University Num: 01FE20BEC307</p>
+        <p>Degree: Bachelor of Engineering</p>
+        <p>Section: A</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

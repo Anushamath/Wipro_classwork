@@ -1,0 +1,88 @@
+/* reset margins */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* hero image with Starbucks product photo */
+.hero-image {
+  background-image: url('https://restaurantindia.s3.ap-south-1.amazonaws.com/s3fs-public/2025-04/Starbucks%20Menu%20Ahmedabad.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 70vh; /* responsive height */
+  min-height: 300px;
+  width: 100%;
+}
+
+/* overlay text on hero image */
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 90%;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin: 10px 0 0 0;
+}
+
+.hero-text button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  background-color: #00704A;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.hero-text button:hover {
+  background-color: #005C39;
+}
+
+/* page content below */
+.content {
+  padding: 20px;
+}
+
+/* responsive text sizing */
+@media screen and (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+  .hero-text button {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+  .hero-text p {
+    font-size: 0.9rem;
+  }
+  .hero-text button {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+  }
+}

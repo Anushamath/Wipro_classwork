@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: rgb(97, 190, 233);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.login-box {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 10px 25px rgba(40, 13, 216, 0.15);
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #190909;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 12px 12px 38px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.remember-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.remember-section input {
+  margin-right: 8px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #e91e63; /* Pink color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.or-divider {
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 15px;
+}
+
+.social-login {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.facebook-btn,
+.google-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.facebook-btn {
+  background-color: #3b5998;
+}
+
+.google-btn {
+  background-color: #db4437;
+}
+
+.signup-link {
+  font-size: 14px;
+}
+
+.signup-link a {
+  color: #e91e63;
+  text-decoration: none;
+}
